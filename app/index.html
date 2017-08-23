@@ -19,7 +19,6 @@
             <img src="/assets/angularjs.svg" width="150" height="40" class="d-inline-block align-top" alt="">
         </div>
     </nav>
-
     <div class="container">
         <div class="row">
             <div class="col-md-6" ng-app>
@@ -80,7 +79,9 @@
             </div>
             <!--  -->
 
+            <!-- controller -->
             <div class="col-md-6" ng-controller="exampleController as vm">
+                <!-- 6 - form -->
                 <div class="card">
                     <div class="card-body">
                         nombre con $scope: {{ name }}
@@ -97,6 +98,8 @@
                         </form>
                     </div>
                 </div>
+
+                <!-- 7 - ng-repeat -->
                 <div class="card">
                     <div class="card-body">
                         <p class="lead">7.- ng-repeat.</p>
@@ -108,8 +111,11 @@
                         </p>
                     </div>
                 </div>
+
+                <!-- filters -->
                 <div class="card">
                     <div class="row">
+                        <!-- 8 - ng-orderBy -->
                         <div class="col-md-6">
                             <div class="card-body">
                                 <p class="lead">8.- ng-orderBy.</p>
@@ -118,6 +124,9 @@
                                 </p>
                             </div>
                         </div>
+                        <!--  -->
+
+                        <!-- 9 - ng-limitTo -->
                         <div class="col-md-6">
                             <div class="card-body">
                                 <p class="lead">9.- ng-limitTo.</p>
@@ -126,12 +135,13 @@
                                 </p>
                             </div>
                         </div>
+                        <!--  -->
                     </div>
                 </div>
             </div>
             <!--  -->
 
-
+            <!-- 10 - more filters-->
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
@@ -157,6 +167,9 @@
                         </div>
                     </div>
                 </div>
+                <!--  -->
+
+                <!-- 11 - ng-class -->
                 <div class="card">
                     <div class="card-body">
                         <p class="lead">11.- ng-class</p>
@@ -170,7 +183,9 @@
                         </div>
                     </div>
                 </div>
+                <!--  -->
             </div>
+            <!--  -->
         </div>
     </div>
     <script src='angular.min.js'></script>
