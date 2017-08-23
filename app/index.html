@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es" ng-app>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angularjs - Bienvenido</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+    <script src='angular.min.js'></script>
+</head>
+
+<body>
+    <!-- As a link -->
+    <nav class="navbar navbar-light bg-dark" style="margin-bottom:20px">
+        <div class="container">
+            <img src="/assets/angularjs.svg" width="150" height="40" class="d-inline-block align-top" alt="">
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- 1 - ng-model -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">1.- ng-model.</p>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Nombre</label>
+                            <input type="text" class="form-control" ng-model="name" placeholder="Nombre">
+                        </div>
+                        <p>nombre: {{ name }}</p>
+                    </div>
+                </div>
+                <!--  -->
+
+                <!-- 2 - ng-if -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">2.- ng-if.</p>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" ng-model="is_check">
+                      Presioname
+                    </label>
+                        </div>
+                        <p class="lead" ng-if="is_check">ng-if => {{name}}.</p>
+                    </div>
+                </div>
+                <!--  -->
+
+                <!-- 3 - ng-show -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">3.- ng-show.</p>
+                        <p class="lead" ng-show="is_check">ng-show => {{name}}.</p>
+                    </div>
+                </div>
+                <!--  -->
+
+                <!-- 4 - ng-hide -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">4.- ng-hide.</p>
+                        <p class="lead" ng-hide="is_check">ng-hide => {{name}}.</p>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+            <!--  -->
+
+            <!-- 2 - ng-model -->
+            <div class="col-md-6">
+                <p class="lead">5.- ng-repeat.</p>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Persona</label>
+                    <input type="text" class="form-control" ng-model="persona.name" placeholder="Nombre">
+                    <input type="text" class="form-control" ng-model="persona.edad" placeholder="Edad">
+                </div>
+                <button class="btn btn-primary text-right" ng-click="people.push(persona.name)">agregar</button>
+                <p class="" ng-repeat="item in people">{{item.name}} - {{item.edad}}</p>
+            </div>
+            <!--  -->
+
+
+
+        </div>
+    </div>
+</body>
+
+</html>
