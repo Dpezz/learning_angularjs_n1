@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" ng-app>
+<html lang="es" ng-app="app">
 
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
         crossorigin="anonymous">
     <link rel="stylesheet" href="app.css">
-    <script src='angular.min.js'></script>
 </head>
 
 <body>
@@ -23,7 +22,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6" ng-app>
                 <!-- 1 - ng-model -->
                 <div class="card">
                     <div class="card-body">
@@ -37,34 +36,43 @@
                 </div>
                 <!--  -->
 
-                <!-- 2 - ng-if -->
+                <!-- 2 - ng-bind -->
                 <div class="card">
                     <div class="card-body">
-                        <p class="lead">2.- ng-if.</p>
+                        <p class="lead">2.- ng-bind.</p>
+                        <p class="lead" ng-bind="name"></p>
+                    </div>
+                </div>
+                <!--  -->
+
+                <!-- 3 - ng-if -->
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">3.- ng-if.</p>
                         <div class="form-check">
                             <label class="form-check-label">
-                      <input class="form-check-input" type="checkbox" ng-model="is_check">
-                      Presioname
-                    </label>
+                                <input class="form-check-input" type="checkbox" ng-model="is_check">
+                                Presioname
+                            </label>
                         </div>
                         <p class="lead" ng-if="is_check">ng-if => {{name}}.</p>
                     </div>
                 </div>
                 <!--  -->
 
-                <!-- 3 - ng-show -->
+                <!-- 4 - ng-show -->
                 <div class="card">
                     <div class="card-body">
-                        <p class="lead">3.- ng-show.</p>
+                        <p class="lead">4.- ng-show.</p>
                         <p class="lead" ng-show="is_check">ng-show => {{name}}.</p>
                     </div>
                 </div>
                 <!--  -->
 
-                <!-- 4 - ng-hide -->
+                <!-- 5 - ng-hide -->
                 <div class="card">
                     <div class="card-body">
-                        <p class="lead">4.- ng-hide.</p>
+                        <p class="lead">5.- ng-hide.</p>
                         <p class="lead" ng-hide="is_check">ng-hide => {{name}}.</p>
                     </div>
                 </div>
@@ -72,23 +80,101 @@
             </div>
             <!--  -->
 
-            <!-- 2 - ng-model -->
-            <div class="col-md-6">
-                <p class="lead">5.- ng-repeat.</p>
-                <div class="form-group">
-                    <label for="exampleInputEmail1">Persona</label>
-                    <input type="text" class="form-control" ng-model="persona.name" placeholder="Nombre">
-                    <input type="text" class="form-control" ng-model="persona.edad" placeholder="Edad">
+            <div class="col-md-6" ng-controller="exampleController as vm">
+                <div class="card">
+                    <div class="card-body">
+                        nombre con $scope: {{ name }}
+                        <hr>
+                        <p class="lead">6.- Form</p>
+                        <form name="form" ng-init="vm.is_new = true">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Persona</label>
+                                <input type="text" class="form-control" ng-model="vm.persona.name" placeholder="Nombre" required>
+                                <input type="number" class="form-control" ng-model="vm.persona.edad" placeholder="Edad" required>
+                            </div>
+                            <button class="btn btn-primary text-right" ng-click="(vm.is_new)?vm.store():vm.update()" ng-disabled="form.$invalid">guardar</button>
+                            <a href="" ng-click="vm.new()">nuevo</a>
+                        </form>
+                    </div>
                 </div>
-                <button class="btn btn-primary text-right" ng-click="people.push(persona.name)">agregar</button>
-                <p class="" ng-repeat="item in people">{{item.name}} - {{item.edad}}</p>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">7.- ng-repeat.</p>
+                        <p class="lead">cantidad personas {{vm.personas.length}}</p>
+                        <p class="" ng-repeat="(key,item) in vm.personas">
+                            {{item.name}} - {{item.edad}} /
+                            <a href="" class="text-primary" ng-click="vm.edit(item,key)">editar</a> -
+                            <a href="" class="text-danger" ng-click="vm.delete(item,key)">eliminar</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="lead">8.- ng-orderBy.</p>
+                                <p class="" ng-repeat="(key,item) in vm.personas | orderBy : ['edad','name']">
+                                    {{item.name}} - {{item.edad}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card-body">
+                                <p class="lead">9.- ng-limitTo.</p>
+                                <p class="" ng-repeat="(key,item) in vm.personas | limitTo : 2">
+                                    {{item.name}} - {{item.edad}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!--  -->
 
 
-
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">10.- Más Filtros</p>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Titulo</label>
+                            <input type="text" class="form-control" ng-model="text" placeholder="titulo">
+                            <p ng-show="text"> a mayusculas: {{ text | uppercase }}</p>
+                            <p ng-show="text"> a minusculas: {{ text | lowercase }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Número</label>
+                            <input type="number" class="form-control" ng-model="number" placeholder="numero">
+                            <p ng-show="number"> a moneda: {{ number | currency }}</p>
+                            <p ng-show="number"> a string: {{ number | number : 2 }}</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Fecha</label>
+                            <input type="date" class="form-control" ng-model="date" placeholder="Fecha">
+                            <p ng-show="date">date short: {{ date | date :'short' }} </p>
+                            <p ng-show="date">date medium: {{ date | date :'medium' }} </p>
+                            <p ng-show="date">date fullDate: {{ date | date :'fullDate' }} </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <p class="lead">11.- ng-class</p>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input" ng-model="is_activate"> {{(is_activate)?'desactivar!':'activar!'}}
+                            </label>
+                        </div>
+                        <div class="alert" role="alert" ng-class="(is_activate)?'alert-success':'alert-danger'">
+                            Alert {{(is_activate)?'activado...':'desactivado...'}}
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <script src='angular.min.js'></script>
+    <script src='exampleController.js'></script>
 </body>
 
 </html>
